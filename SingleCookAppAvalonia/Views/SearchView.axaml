@@ -1,0 +1,74 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="450"
+             x:Class="SingleCookAppAvalonia.Views.SearchView"
+             x:DataType="local:SearchViewModel"
+             xmlns:local="clr-namespace:SingleCookAppAvalonia.ViewModels"
+             >
+
+    <StackPanel>
+        <TextBlock Text="Search Page!" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <StackPanel Margin="30" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <TextBox AcceptsReturn="False" Text="{Binding Keyword, Mode=TwoWay}" Watermark="Enter Keyword" Width="200"/>
+            <ComboBox SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" MaxDropDownHeight="300" Width="250">
+                <ComboBoxItem Content="Search by Recipe Name"/>
+                <ComboBoxItem Content="Search by User"/>
+                <ComboBoxItem Content="Search by Portion"/>
+                <ComboBoxItem Content="Search by Preparation Time"/>
+                <ComboBoxItem Content="Search by Ingredient"/>
+                <ComboBoxItem Content="Search by Tag"/>
+                <ComboBoxItem Content="Search by Rate"/>
+            </ComboBox>
+            <Button Command="{Binding SearchCommand}" Content="Search" Width="200"/>
+            <Button Command="{Binding $parent[Window].DataContext.NavToMainPage}" Content="GoBack" x:CompileBindings="False"/>
+        </StackPanel>
+        <TextBlock Text="{Binding SearchFounds}" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ListBox ItemsSource="{Binding SearchResults}"   SelectedItem="{Binding SelectedRecipe}"  SelectionMode="Single" Width="500">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Blue" BorderThickness="3" Margin="10"> 
+                    <StackPanel>
+                        <TextBlock Text="Recipe:" FontWeight="Bold" Margin="0,0,0,1"/>
+                        <TextBlock Text="{Binding RecipeName}"  />
+                        <TextBlock Text="Created By:" FontWeight="Bold" Margin="0,0,0,1"/>
+                        <TextBlock Text="{Binding UserId}" />
+                        <TextBlock Text="Description:" FontWeight="Bold" Margin="0,0,0,1"/>
+                        <TextBlock Text="{Binding Description}" />
+                        <TextBlock Text="Tags:" FontWeight="Bold" Margin="0,0,0,1"/>
+                        <ItemsControl ItemsSource="{Binding RecipeTags}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TagName}" Margin="0,0,5,0"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock Text="Ingredients:" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <ItemsControl ItemsSource="{Binding Ingredients}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding IngredientName}" Margin="0,0,5,0"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        
+
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="SingleCookAppAvalonia.Views.FavoriteRecipesView"
+             x:DataType="local:FavoriteRecipesViewModel"
+             xmlns:local="clr-namespace:SingleCookAppAvalonia.ViewModels">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+    
+    <Image Source="/Assets/heart.webp" Width="300" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20"/>
+
+    <StackPanel  Grid.Column="1" VerticalAlignment="Center" Margin="30">
+        <TextBlock Text="Your Favorite Recipes" FontWeight="Bold" HorizontalAlignment="Center" Margin="15" />
+        <Button Command="{Binding $parent[Window].DataContext.NavToMainPage}" HorizontalAlignment="Center" Content="GoBack"  Margin="10" x:CompileBindings="False"/>
+        <ListBox ItemsSource="{Binding FavoriteRecipes}" SelectedItem="{Binding SelectedRecipe}"  SelectionMode="Single" Margin="15" Width="300">
+            <ListBox.ItemTemplate >
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding UserId}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding RecipeName}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Description}" FontWeight="Bold"/>
+                        <Button Content="Remove from Favorites"
+                                Command="{Binding DataContext.RemoveFromFavoritesCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                CommandParameter="{Binding}" x:CompileBindings="False">Delete From Favourites</Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+    </Grid>
+</UserControl>

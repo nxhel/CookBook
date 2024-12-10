@@ -1,0 +1,15 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SingleCookAppAvalonia.Views.HeaderView"
+             x:Name="root"
+             Height="70">
+    <Grid Background="Blue">
+        <!-- Your header content here, such as logo and website name -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <TextBlock Text="Welcome to !SingleCooks!" Foreground="White" FontWeight="Bold" FontSize="20" Margin="10 0 "  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

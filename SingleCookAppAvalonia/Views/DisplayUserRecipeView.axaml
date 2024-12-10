@@ -1,0 +1,67 @@
+ <!--Cannot bind UserRecipes?-->
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SingleCookAppAvalonia.Views.DisplayUserRecipeView"
+             x:DataType="local:DisplayUserRecipeViewModel"
+             xmlns:local="clr-namespace:SingleCookAppAvalonia.ViewModels"
+             xmlns:views="clr-namespace:SingleCookAppAvalonia.Views">
+
+
+             
+
+           
+  <StackPanel>
+    <TextBlock Text="Looking Back At Your Recipes" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15"/>
+    <Button Command="{Binding GoBack}" Content="GoBack" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="15" />
+
+      <ListBox ItemsSource="{Binding UserRecipes}" SelectedItem="{Binding SelectedRecipe}" HorizontalAlignment="Center" Width="500" Margin="30" >
+        <ListBox.ItemTemplate >
+          <DataTemplate >
+            <StackPanel>
+                <TextBlock Text="{Binding RecipeName}" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Description}"/>
+                <TextBlock Text="{Binding PreparationTime, StringFormat='Preparation Time: {0} mins'}"/>
+                <TextBlock Text="{Binding CookingTime, StringFormat='Cooking Time: {0} mins'}"/>
+                <TextBlock Text="{Binding Servings, StringFormat='Servings: {0}'}"/>
+                 <TextBlock Text="Ingredients:" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <ItemsControl ItemsSource="{Binding Ingredients}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding IngredientName}" Margin="0,0,5,0"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock Text="Instructions:" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <ItemsControl ItemsSource="{Binding Instructions}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Instructions}" Margin="0,0,5,0"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+               
+             </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel  HorizontalAlignment="Right" Margin="30" Orientation="Horizontal">
+        <Button Command="{Binding EditRecipeCommand}" CommandParameter="{Binding SelectedRecipe}" x:CompileBindings="False">Edit Recipe</Button>
+        <Button Command="{Binding DeleteRecipeCommand}" CommandParameter="{Binding SelectedRecipe}" x:CompileBindings="False">Delete Recipe</Button> 
+        </StackPanel>
+      </StackPanel>
+    
+</UserControl>

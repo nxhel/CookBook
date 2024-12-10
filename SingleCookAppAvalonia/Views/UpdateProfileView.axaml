@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SingleCookAppAvalonia.Views.UpdateProfileView"
+             x:DataType="local:UpdateProfileViewModel"
+             xmlns:local="clr-namespace:SingleCookAppAvalonia.ViewModels">
+
+    <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Image Source="/Assets/bobadefaultUser.png" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+        <TextBlock Text="Update User Info!" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,10"/>
+        <StackPanel Margin="4" HorizontalAlignment="Center">
+            <TextBlock Text="Username(Unchangeable): " Margin="0,0,0,5"/>
+            <TextBox AcceptsReturn="False" Text="{Binding Username}" Watermark="You cannot type here" IsReadOnly="True" HorizontalAlignment="Center" Width="200"/>
+            <TextBlock Text="Email: " Margin="10,0,0,5"/>
+            <TextBox AcceptsReturn="False" Text="{Binding Email}" Watermark="Email" HorizontalAlignment="Center" Width="200"/>
+            <TextBlock Text="Bio: " Margin="10,0,0,5"/>
+            <TextBox AcceptsReturn="False" Text="{Binding Bio}" Watermark="Bio" HorizontalAlignment="Center" Width="200"/>
+            <TextBlock Text="Password: " Margin="10,0,0,5"/>
+            <TextBox AcceptsReturn="False" Text="{Binding Password}" Watermark="Password" PasswordChar="·" HorizontalAlignment="Center" Width="200"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Width="200" Margin="10,20,0,0">
+            <Button Command="{Binding UpdateProfileCommand}" Content="Update" Margin="5"/>
+            <Button Command="{Binding CancelCommand}" Content="Cancel" Margin="5"/>
+        </StackPanel>
+        
+    </StackPanel>
+    </ScrollViewer>
+</UserControl>

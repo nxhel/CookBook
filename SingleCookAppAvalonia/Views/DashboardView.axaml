@@ -1,0 +1,86 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="450"
+             x:Class="SingleCookAppAvalonia.Views.DashboardView"
+             x:DataType="local:DashboardViewModel"
+             xmlns:local="clr-namespace:SingleCookAppAvalonia.ViewModels"
+             xmlns:views="clr-namespace:SingleCookAppAvalonia.Views">
+    
+    <StackPanel>
+        <StackPanel Margin="10">
+
+            <Grid  VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+    
+                <TextBlock Grid.Column="0" Text="Hi There, Welcome to Your Dashboard!" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20" Margin="5" />
+                <Menu Grid.Column="1" Background="LightBlue" HorizontalAlignment="Right" Margin="0,5,20,0">
+                    <MenuItem Header="Settings">
+                        <MenuItem Header="Logout" Command="{Binding LogoutCommand}" x:CompileBindings="False"/>
+                        <MenuItem Header="Delete Account" Command="{Binding DeleteAccountCommand}" x:CompileBindings="False"/>
+                        <MenuItem Header="Update Account" Command="{Binding UpdateProfileCommand}" x:CompileBindings="False"/>
+                    </MenuItem>
+                </Menu>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Button Command="{Binding CreateRecipeCommand}">Create Recipe</Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Button Command="{Binding MyRecipesCommand}">My Recipe</Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Button Command="{Binding MyFavoritesCommand}">My Favorites</Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                     <Button Command="{Binding  $parent[views:MainWindow].DataContext.NavigateToSearchRecipes}" Content="Search" x:CompileBindings="False"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                     <Button Command="{Binding  $parent[views:MainWindow].DataContext.NavToMainPage}" Content="GoBack" x:CompileBindings="False"/>
+                </StackPanel>
+            </StackPanel>
+
+           <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- User Information in the middle -->
+            <TextBlock Grid.Row="0" Text="User Information:" FontWeight="Bold" Margin="10" HorizontalAlignment="Center"/>
+
+            <!-- User details displayed below -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <TextBlock Text="{Binding Username}" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding Email}" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding Bio}" Margin="0,0,5,0"/>
+            </StackPanel>
+
+
+        </Grid>
+
+        <TextBlock Text="Top Three Recipe At The Moment: " HorizontalAlignment="Center" Margin="10" FontWeight="Bold"/>
+                <ListBox ItemsSource="{Binding Recipes}" SelectionMode="Single" SelectedItem="{Binding SelectedRecipe}" Margin="10" Width="300">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            
+                            <TextBlock Text="{Binding RecipeName}" FontWeight="Bold" Foreground="Blue" />
+                        </DataTemplate>
+
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+
+            <!-- <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                
+            </StackPanel> -->
+
+        </StackPanel>
+    </StackPanel>
+</UserControl>

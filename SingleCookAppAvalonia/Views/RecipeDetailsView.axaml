@@ -1,0 +1,76 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:SingleCookAppAvalonia.ViewModels"
+             x:Class="SingleCookAppAvalonia.Views.RecipeDetailsView"
+             x:DataType="local:RecipeDetailsViewModel">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="/Assets/detec.jpg" Width="300" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            
+            
+            <StackPanel Grid.Column="1">
+                
+                <StackPanel Margin="35" HorizontalAlignment="Center">
+                            <TextBlock Text=" Viewing A Specific Recipe" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
+                            <TextBlock Text="Current Recipe Name:" FontWeight="Bold" Margin="0,0,0,1"/>
+                            <TextBlock Text="{Binding Recipe.RecipeName}"  />
+                            <TextBlock Text="Was Created By the User :" FontWeight="Bold" Margin="0,0,0,1"/>
+                            <TextBlock Text="{Binding Recipe.UserId}" />
+                            <TextBlock Text="Description:" FontWeight="Bold" Margin="0,0,0,1"/>
+                            <TextBlock Text="{Binding Recipe.Description}" />
+                            <TextBlock Text="Tags:" FontWeight="Bold" Margin="0,0,0,1"/>
+        
+                            <ItemsControl ItemsSource="{Binding Recipe.Ingredients}" >
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding IngredientName}" Margin="0,0,5,0"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <TextBlock Text="Instructions:" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <ItemsControl ItemsSource="{Binding Recipe.Instructions}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Instructions}" Margin="0,0,5,0"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl> 
+                            <TextBlock Text="Overal Rating:" FontWeight="Bold" Margin="0,0,0,1"/>
+                            <TextBlock Text="{Binding Recipe.OverallRating}" />
+                            
+                        <StackPanel  Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" IsVisible="{Binding IsLoggedIn}">
+                                <TextBlock Margin="0 5">Add Rating:</TextBlock>
+                                <NumericUpDown Value="{Binding Rating, Mode=TwoWay}" Maximum="5" Minimum="0" Increment="0.5" />
+                                <Button Command="{Binding AddRating}" CommandParameter="{Binding Recipe}" Content="Submit Rating"  HorizontalAlignment="Right" x:CompileBindings="False"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" IsVisible="{Binding IsLoggedIn}">
+                                <Button Command="{Binding AddToFavorites}" CommandParameter="{Binding Recipe}"  Content="Add To Favorites"  HorizontalAlignment="Right" x:CompileBindings="False"/>
+                            </StackPanel>
+
+                            <Button Command="{Binding $parent[Window].DataContext.NavToMainPage}" Content="GoBack"  HorizontalAlignment="Right" x:CompileBindings="False"/>
+                        </StackPanel>
+                    </StackPanel>
+                    
+            </StackPanel>
+            
+        </Grid>
+    </ScrollViewer>
+</UserControl>

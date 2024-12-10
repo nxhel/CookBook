@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SingleCookAppAvalonia.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:Class="SingleCookAppAvalonia.Views.MainPageView"
+             x:DataType="vm:MainPageViewModel">
+
+    <StackPanel>
+        
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Source="/Assets/lilo.jpg" Width="400" Height="500" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Command="{Binding NavigateToLogin}" Content="Login"/>
+            <Button Command="{Binding NavigateToSearchRecipes}" Content="Login As Guest"/>
+            <Button Command="{Binding NavigateToRegisterPage}" Content="Register"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

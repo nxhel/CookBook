@@ -1,0 +1,85 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:SingleCookAppAvalonia.ViewModels"
+             x:Class="SingleCookAppAvalonia.Views.RecipeEditView"
+             x:DataType="local:RecipeEditViewModel">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text=" Yay! Create a New Recipe" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
+
+            <StackPanel Margin="25">
+
+            <TextBlock Text="Recipe Name" FontWeight="Bold"/>
+            <TextBox Text="{Binding RecipeName}" Watermark="Recipe Name"/>
+
+            <TextBlock Text="Description" FontWeight="Bold"/>
+            <TextBox Text="{Binding Description}" Watermark="Description"/>
+
+            <TextBlock Text="Preparation Time" FontWeight="Bold"/>
+            <TextBox Text="{Binding PreparationTime}" Watermark="Preparation Time (minutes)" TextAlignment="Left"/>
+
+            <TextBlock Text="Cooking Time" FontWeight="Bold"/>
+            <TextBox Text="{Binding CookingTime}" Watermark="Cooking Time (minutes)" TextAlignment="Left"/>
+            
+            <TextBlock Text="Servings" FontWeight="Bold"/>
+            <TextBox Text="{Binding Servings}" Watermark="Servings" TextAlignment="Left"/>
+
+            <!-- Ingredient Section -->
+            <TextBlock Text="Ingredients" FontWeight="Bold"/>
+            <TextBox Text="{Binding NewIngredientName}" Watermark="New Ingredient Name"/>
+            <Button Command="{Binding AddIngredientCommand}">Add Ingredient</Button>
+            <ListBox ItemsSource="{Binding Ingredients}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                            <TextBox Text="{Binding NewNutrientName}" Watermark="Nutrient Name"/>
+                            <TextBox Text="{Binding NewNutrientAmount}" Watermark="Amount" TextAlignment="Right"/>
+                            <Button Command="{Binding UpdateNutrientCommand}">Add Nutrient</Button>
+                            <ListBox ItemsSource="{Binding Nutrients}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name} - {Binding Amount}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!-- Instructions Section -->
+            <TextBlock Text="Instructions" FontWeight="Bold"/>
+            <TextBox Text="{Binding NewInstructionStep}" Watermark="New Instruction"/>
+            <Button Command="{Binding AddInstructionCommand}">Add Instruction</Button>
+            <ListBox ItemsSource="{Binding Instructions}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Instructions}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!-- Instructions Section -->
+            <TextBlock Text="Tags" FontWeight="Bold"/>
+            <TextBox Text="{Binding NewTag}" Watermark="New Tag"/>
+            <Button Command="{Binding AddTagCommand}">Add Tag</Button>
+            <ListBox ItemsSource="{Binding Tags}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding TagName}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Command="{Binding UpdateRecipeCommand}" Content="Update Recipe" Margin="0,0,10,0"/>
+                <Button Command="{Binding $parent[Window].DataContext.NavToMainPage}" Content="Cancel" x:CompileBindings="False"/>
+            </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
